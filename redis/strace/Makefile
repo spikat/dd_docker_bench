@@ -1,13 +1,15 @@
 build:
-	docker build -t jonathanribas351/redis-7.2.4-strace .
+	@docker build -t jonathanribas351/redis-7.2.4-strace .
 
 run: build
-	docker run --network host --cap-add=SYS_PTRACE --name redis-strace -d jonathanribas351/redis-7.2.4-strace:latest
+	@docker run --network host --cap-add=SYS_PTRACE --name redis-strace -d jonathanribas351/redis-7.2.4-strace:latest
 
 bench:
-	docker run --network host -it --rm redis redis-benchmark
+	@docker run --network host -it --rm redis redis-benchmark|grep "per second" > results
+	@../get_results.sh
 
 clean:
-	docker rm -f redis-strace
+	@docker rm -f redis-strace
+	@rm -f results
 
 all: build

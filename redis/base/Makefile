@@ -1,13 +1,15 @@
 build:
-	docker build -t jonathanribas351/redis-7.2.4 .
+	@docker build -t jonathanribas351/redis-7.2.4 .
 
 run: build
-	docker run --network host --name redis -d jonathanribas351/redis-7.2.4:latest
+	@docker run --network host --name redis -d jonathanribas351/redis-7.2.4:latest
 
 bench:
-	docker run --network host -it --rm redis redis-benchmark
+	@docker run --network host -it --rm redis redis-benchmark|grep "per second" > results
+	@../get_results.sh
 
 clean:
-	docker rm -f redis
+	@docker rm -f redis
+	@rm -f results
 
 all: build
