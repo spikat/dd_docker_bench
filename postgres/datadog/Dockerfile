@@ -192,7 +192,7 @@ COPY docker-entrypoint.sh docker-ensure-initdb.sh /usr/local/bin/
 RUN ln -sT docker-ensure-initdb.sh /usr/local/bin/docker-enforce-initdb.sh
 COPY cws-instrumentation /
 USER root
-ENTRYPOINT ["/cws-instrumentation", "trace", "--verbose", "--probe-addr=", "--", "docker-entrypoint.sh"]
+ENTRYPOINT ["/cws-instrumentation", "trace", "--", "docker-entrypoint.sh"]
 
 # We set the default STOPSIGNAL to SIGINT, which corresponds to what PostgreSQL
 # calls "Fast Shutdown mode" wherein new connections are disallowed and any

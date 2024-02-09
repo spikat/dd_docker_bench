@@ -148,7 +148,7 @@ WORKDIR /data
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY cws-instrumentation /
 USER root
-ENTRYPOINT ["/cws-instrumentation", "trace", "--verbose", "--probe-addr=", "--", "docker-entrypoint.sh"]
+ENTRYPOINT ["/cws-instrumentation", "trace", "--", "docker-entrypoint.sh"]
 
 EXPOSE 6379
 CMD ["redis-server"]
