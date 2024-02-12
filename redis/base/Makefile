@@ -6,7 +6,7 @@ run: build
 
 bench:
 	@docker run --network host -it --rm redis redis-benchmark -n 10000 -c 20|grep "per second" > results
-	@../get_results.sh
+	@../get_results.sh|tee -a bench_results
 
 clean:
 	@docker rm -f redis

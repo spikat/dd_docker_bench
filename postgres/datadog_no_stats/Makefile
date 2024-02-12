@@ -10,7 +10,7 @@ prep:
 	@touch prep
 
 bench: prep
-	@docker run --network host -it --rm postgres pgbench -c 10 -j 2 -t 1000 benchmark -h 127.0.0.1 -p 5432 -U postgres|grep tps|cut -d" " -f 3|sed 's/\.[0-9]*//'
+	@docker run --network host -it --rm postgres pgbench -c 10 -j 2 -t 1000 benchmark -h 127.0.0.1 -p 5432 -U postgres|grep tps|cut -d" " -f 3|sed 's/\.[0-9]*//'|tee -a bench_results
 
 clean:
 	@docker rm -f postgres.datadog
