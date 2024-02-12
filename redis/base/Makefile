@@ -10,6 +10,6 @@ bench:
 
 clean:
 	@docker rm -f redis
-	@rm -f results
+	@rm -f results bench_results
 
 all: build

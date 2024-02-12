@@ -9,5 +9,6 @@ bench:
 
 clean:
 	@docker rm -f nginx.strace
+	@rm -f bench_results
 
 all: build

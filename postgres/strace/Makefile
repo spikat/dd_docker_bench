@@ -14,6 +14,6 @@ bench: prep
 
 clean:
 	@docker rm -f postgres.strace
-	@rm -f prep
+	@rm -f prep bench_results
 
 all: build
