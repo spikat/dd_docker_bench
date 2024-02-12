@@ -90,8 +90,6 @@ RUN set -ex; \
 ENV PG_MAJOR 16
 ENV PATH $PATH:/usr/lib/postgresql/$PG_MAJOR/bin
 
-ENV PG_VERSION 16.2-1.pgdg120+1
-
 RUN set -ex; \
 	\
 # see note below about "*.pyc" files
@@ -137,8 +135,8 @@ RUN set -ex; \
 			apt-get build-dep -y postgresql-common pgdg-keyring; \
 			apt-get source --compile postgresql-common pgdg-keyring; \
 			_update_repo; \
-			apt-get build-dep -y "postgresql-$PG_MAJOR=$PG_VERSION"; \
-			apt-get source --compile "postgresql-$PG_MAJOR=$PG_VERSION"; \
+			apt-get build-dep -y "postgresql-$PG_MAJOR"; \
+			apt-get source --compile "postgresql-$PG_MAJOR"; \
 			\
 # we don't remove APT lists here because they get re-downloaded and removed later
 			\
@@ -157,7 +155,7 @@ RUN set -ex; \
 	apt-get install -y --no-install-recommends postgresql-common; \
 	sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf; \
 	apt-get install -y --no-install-recommends \
-		"postgresql-$PG_MAJOR=$PG_VERSION" \
+		"postgresql-$PG_MAJOR" \
 	; \
 	\
 	rm -rf /var/lib/apt/lists/*; \
