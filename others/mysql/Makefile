@@ -1,0 +1,12 @@
+NAME=mysql
+
+build:
+	@docker build -t jonathanribas351/$(NAME) .
+
+run: build
+	@docker run -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" --cap-add=SYS_PTRACE --network host --name $(NAME) -d jonathanribas351/$(NAME):latest
+
+clean:
+	@docker rm -f $(NAME)
+
+all: build
